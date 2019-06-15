@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/scan"
+        android:enabled="true"
+        android:icon="@drawable/scan"
+        android:title="扫一扫"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/navigator"
+        android:enabled="true"
+        android:icon="@drawable/navigator"
+        android:title="导航"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/duty"
+        android:enabled="true"
+        android:icon="@drawable/duty"
+        android:title="业务"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/my"
+        android:enabled="true"
+        android:icon="@drawable/my"
+        android:title="我的"
+        app:showAsAction="ifRoom" />
+</menu>
