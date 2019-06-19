@@ -17,7 +17,7 @@ import com.tencent.mmkv.MMKV;
  */
 
 public class Fragment2 extends Fragment {
-    String TAG = "Fragment1";
+    String TAG = "Fragment2";
     MMKV mmkv;
     @Nullable
     @Override

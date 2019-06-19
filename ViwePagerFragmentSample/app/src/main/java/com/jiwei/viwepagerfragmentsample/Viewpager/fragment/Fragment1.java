@@ -23,8 +23,6 @@ public class Fragment1 extends Fragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        mmkv = MMKV.defaultMMKV();
-        Log.e(TAG,mmkv.getString("fragment1",""));
     }
 
     @Nullable
@@ -32,6 +30,8 @@ public class Fragment1 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_fragment1,
                 container, false);
+        mmkv = MMKV.defaultMMKV();
+        Log.e(TAG,mmkv.getString("fragment1",""));
         return view;
     }
 }

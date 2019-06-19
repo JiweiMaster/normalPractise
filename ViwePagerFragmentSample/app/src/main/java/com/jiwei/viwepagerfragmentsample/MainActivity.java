@@ -6,14 +6,20 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.jiwei.viwepagerfragmentsample.BottomNavigator.BottomNavigationViewHelper;
 import com.jiwei.viwepagerfragmentsample.Viewpager.MainFragmentPagerAdapter;
+import com.jiwei.viwepagerfragmentsample.jni.JniUtils;
 import com.tencent.mmkv.MMKV;
 
+import java.lang.reflect.Field;
+
 public class MainActivity extends AppCompatActivity {
+    String TAG = "MainActivity";
     BottomNavigationView bottomNavigationView;
     BottomNavigationMenuView menuView;
 
@@ -36,11 +42,22 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
         BottomNavigationViewHelper.setBottomNavigationColor(this,bottomNavigationView);
+        mainViewPager.setOffscreenPageLimit(0);
+        try {
+            Log.e(TAG,"类名=>"+ViewPager.class.getName());
+            Class clazz = Class.forName(ViewPager.class.getName());
+            Field field = clazz.getDeclaredField("DEFAULT_OFFSCREEN_PAGES");
+            field.setAccessible(true);
+            field.set(mainViewPager,0);
+            Log.e(TAG,"DEFAULT_OFFSCREEN_PAGES=>"+field.get(mainViewPager).toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(TAG,e.toString());
+        }
+        mainViewPager.setCurrentItem(0);
 
         mainFragmentPagerAdapter = new MainFragmentPagerAdapter(getSupportFragmentManager());
         mainViewPager.setAdapter(mainFragmentPagerAdapter);
-        mainViewPager.setOffscreenPageLimit(3);
-        mainViewPager.setCurrentItem(0);
 
         mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -103,5 +120,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        Toast.makeText(this,""+Hello(),Toast.LENGTH_SHORT).show();
+        Log.e(TAG,"jni=>"+ JniUtils.Hello());
     }
+
+
 }
